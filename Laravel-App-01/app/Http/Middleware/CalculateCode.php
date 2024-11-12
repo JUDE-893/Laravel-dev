@@ -6,6 +6,15 @@ use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
+// --------- Middlewares----------
+/*
+  - powerful mechanism used to filter HTTP requests entring the Application
+  - it acts as a layer between the HTTP request and its response, where proper actions are perfomed before or after the request is handled by hte routes
+*/
+
+
+
+
 class CalculateCode
 {
     /**

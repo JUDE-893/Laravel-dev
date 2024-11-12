@@ -22,6 +22,29 @@
     <body class="font-sans antialiased dark:bg-black dark:text-white/50">
       <div class="">
         <a href="{{route('item.details', ['item' => 'keyboard', 'id' => 'MGKB3434534534523FSDFSDFS' ])}}">Apple Magic KeyBoard</a>
+
+        <form class="email" action="/csrf" method="post">
+          <!-- {{--@csrf--}}
+          {{--csrf_field()--}} -->
+          <!-- <input type="hidden" name="_token" value="{{--csrf_token()--}}"> -->
+          <input type="email" name="" value="">
+          <input type="submit" name="" value="GO!">
+        </form>
+
+        <script >
+          document.querySelector(".email").addEventListener('submit', (e)=> {
+            e.preventDefault();
+            axios.post('/csrf', {})
+              .then((response) => {
+                console.log(response);
+              })
+              .catch((error) => {
+                console.error('Error:', error);
+              });
+
+          })
+        </script>
+
       </div>
     </body>
 </html>

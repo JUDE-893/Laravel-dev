@@ -52,9 +52,19 @@ Route::get('item.details/{item}/{id?}', function( string $item = null, string $i
   return response()->json(['item' => $item, 'id' => $id]);
 })->name(name:'item.details');
 
-// using middleware app for route
-
+//------------middlewares-------------
 Route::get('middleware/{item}/{id?}', function( string $item = null, string $id = null, Request $request) {
   $query = $request->query('code');
   return "code was $query";
-})->name(name:'middleware')->middleware(middleware:CalculateCode::class);
+})->name(name:'middleware')/*->middleware(middleware:CalculateCode::class)*/;
+
+//-----------middleware Alias ---------
+Route::get('middleware/{item}/{id?}', function( string $item = null, string $id = null, Request $request) {
+  $query = $request->query('code');
+  return "code was $query";
+})->name(name:'middleware')->middleware('code');
+
+// --------csrf----------
+Route::post('/csrf', function() {
+  return view('csrf');
+});
