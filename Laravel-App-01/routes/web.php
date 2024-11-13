@@ -3,6 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use App\Http\Middleware\CalculateCode;
+use App\Http\Controllers\PostesController;
+use App\Http\Controllers\HomePageController;
+use App\Http\Controllers\LoginController;
 
 // ----------dependencies injection -------
 /*
@@ -12,9 +15,13 @@ use App\Http\Middleware\CalculateCode;
 
 
 // ----------returning Views --------------
-
+/*
 // using the helper method* "view()"
 // NOTE: the helper methods are a bunch of built-in function in Laravel that are made globally accessible in order to perform some simple task (arrays,url paths ..)
+Route::get('/', function () {
+    return view('welcome');
+});
+
 Route::get('/home', function () {
     return view('welcome');
 });
@@ -56,7 +63,7 @@ Route::get('item.details/{item}/{id?}', function( string $item = null, string $i
 Route::get('middleware/{item}/{id?}', function( string $item = null, string $id = null, Request $request) {
   $query = $request->query('code');
   return "code was $query";
-})->name(name:'middleware')/*->middleware(middleware:CalculateCode::class)*/;
+})->name(name:'middleware')->middleware(middleware:CalculateCode::class)
 
 //-----------middleware Alias ---------
 Route::get('middleware/{item}/{id?}', function( string $item = null, string $id = null, Request $request) {
@@ -68,3 +75,13 @@ Route::get('middleware/{item}/{id?}', function( string $item = null, string $id 
 Route::post('/csrf', function() {
   return view('csrf');
 });
+
+// ------ Controller-----
+Route::get("/page",[PostesController::class, 'index']);
+Route::get("/",[HomePageController::class, 'index']);*/
+
+Route::resource(name: 'Paluma',controller:HomePageController::class);
+Route::get("/paluma/Product",[HomePageController::class, 'product'])->name(name:'product');
+Route::get("/paluma/signUp", [LoginController::class, 'signup'])->name(name:'SignUp');
+Route::post("/paluma/store", [LoginController::class, 'store'])->name(name:'SignUp');
+Route::resource(name : "/paluma/Login",controller: LoginController::class);
