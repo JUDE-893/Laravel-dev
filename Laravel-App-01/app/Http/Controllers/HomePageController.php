@@ -9,9 +9,9 @@ class HomePageController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('index');
+        return $request->query('id');
     }
     // Paluma/product : render the products page
     public function product(Request $request)

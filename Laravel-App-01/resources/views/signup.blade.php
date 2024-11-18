@@ -21,6 +21,7 @@
   <body>
     <form class="form-signin" action="/paluma/store" method="post">
       @csrf
+      <input type="hidden" name="_token" value="{{csrf_token()}}">
       <div class="text-center mb-4">
         <img class="mb-4" src="https://getbootstrap.com/docs/4.0/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
         <h1 class="h3 mb-3 font-weight-normal">Sign Up</h1>
@@ -60,5 +61,7 @@
       <p class="mt-5 mb-3 text-muted text-center">Already have an account? <a href="/paluma/Login/?login=true">Log In</a> </p>
 
     </form>
+
+    {{old('error_message')}}
   </body>
 </html>

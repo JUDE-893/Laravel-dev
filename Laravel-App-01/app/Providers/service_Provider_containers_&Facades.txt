@@ -1,0 +1,21 @@
+--------How Facades Works  behind the scene---------
+
+  - def : Facades classes : are static classes that provides static interfaces (methods) to implement classes instances available in the App. service container.
+    - Facades classes allows to use classes' instances methods statically and without having to directly and manually instantiate the class.
+    - Facades took place to enhance the App. by :
+      # code clearance : reducing the process of using services by statically access them via the Facade class (no instantiation, or direct access from the instances).
+      # performance : the class used by the Facade (e.g : Route, Cache, Auth..) is usually instantiated just once the resulted instance is re-used for the common next uses.
+
+  --mechanism:--
+    -> the facade class get created (automatically or manually) and extends from the Facade base class.
+    -> the getFacadeAcccessor() method get defined in order to return the binding key(?). (e.g in the Route Facade class it returns 'route').
+    (?) Bindings or binding key : are used specially to identify which class instance to retrieve from the service container.
+    -> as a static method get called on a Facade (e.g: Route::get()) it triggers the __callStatic() facade's static methods, which then calls getFacadeRoot() method inside of it.
+    -> getFacadeRoot() is another base Facade class' method, which is used to retrieve (or resolve) then return the required instance by calling the app(static::getFacadeAccessor())(?) function with the result of getFacadeAccessor().
+    (?) app() : is a helper function that allow to retrieve and resolve services that are registered in the Service Container(?).
+    (?) Service Container : a registry or repository where object,classes or services that the App depends On, its responsible for managing class instantiation and dependency resolution depending on how these classes were registered in their Service Providers(?).
+    (?) Service provider : is where classes and services that the App depends on are registered and determine HOW(+) and When(+) these classes should be instantiated in Service Container. Also its where these classes are associated with a key in the container so it will be resolver later (??Facade??). The whole registration process is often called BINDING.
+    (+) HOW : we can differentiate 2 types of binding in Laravel:
+              # SingleTon Binding : this ensure that the class would be instantiated only one ant the instance resulted would be re-used throughout the life cycle of the App.
+              # Normal Binding : default option, create a new instance eachTime the class requested. This is common when the class itself has some variable dependencies.
+    (??Facade??) : the binding is the same as the key returned by the getFacadeAccessor() method.

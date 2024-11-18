@@ -39,7 +39,7 @@ class LoginController extends Controller
   ];
 
 
-       $error ='';
+       $error ='NoErrorsSoFar!';
 
       if(!preg_match($pattern[0], $request->input("data.0"))) {
         $error = "invalid value for the first name";
@@ -60,14 +60,25 @@ class LoginController extends Controller
               if ($request->input("data.3") !== $request->input("data.4")) {
                 $error = "please confirme the email value";
               }else {
-                return view('index');
+                $request->merge(['error_message'=>$error]);
+                $request->flash();
+                return redirect(to :'/Paluma');
               }
             }
           }
         }
       }
 
-        return $error;
+      $request->merge(['error_message'=>$error]);
+      $request->flash(); // store the request data in the session
+      return back()->withInput();
+
+      /*------session flashed data-------
+        - flashing data : is an aproash that allow to store data from the current request in the session
+        - flash() // store the request data in the session
+        - old() retrieve data from the session
+        - request flashed data get removed when the new request is triggered regardless of this request's route or resource.
+      */
     }
 
     /**
