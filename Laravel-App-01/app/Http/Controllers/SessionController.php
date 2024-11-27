@@ -4,21 +4,15 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class HomePageController extends Controller
+class SessionController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request)
+    public function index()
     {
-        //return $request->query('id');
-        return view('index');
-    }
-    // Paluma/product : render the products page
-    public function product(Request $request)
-    {
-        dd($request);
-        return "products";
+      $value = session('lastBreath', 'default value');
+      return "here is a secret $value";
     }
 
     /**
@@ -56,9 +50,12 @@ class HomePageController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, string $about, string $secret)
     {
-        //
+        session([ $about => $secret]);
+        $request->session()->put($request->query);
+        session()->save();
+        return session()->all();
     }
 
     /**

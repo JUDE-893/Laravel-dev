@@ -21,22 +21,27 @@
   <body>
     <div class="d-flex d-column">
 
-      <form class="form-signin" action="/paluma/Login/?">
+      <form class="form-login needs-validation" action="{{route('Login.store')}}" method="post">
         @csrf
-        @method('HEAD')
         <div class="text-center mb-4">
           <img class=GGG"mb-4" src="https://getbootstrap.com/docs/4.0/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
           <h1 class="h3 mb-3 font-weight-normal">Log In</h1>
         </div>
 
         <div class="form-label-group">
-          <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus value='{{$user['email']}}'>
+          <input value="{{old("email")}}" type="email" name="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus value='' aria-describedby="email-feedback">
           <label for="inputEmail">Email address</label>
+          <div id="email-feedback" class="invalidfeedback">
+            @error('email') {{$message}} @enderror
+          </div>
         </div>
 
         <div class="form-label-group">
-          <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+          <input  value="{{old("password")}}" type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
           <label for="inputPassword">Password</label>
+          <div id="email-feedback" class="invalidfeedback">
+            @error('password') {{$message}} @enderror
+          </div>
         </div>
 
         <div class="checkbox mb-3">

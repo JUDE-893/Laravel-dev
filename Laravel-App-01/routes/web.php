@@ -6,6 +6,7 @@ use App\Http\Middleware\CalculateCode;
 use App\Http\Controllers\PostesController;
 use App\Http\Controllers\HomePageController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\SessionController;
 
 // ----------dependencies injection -------
 /*
@@ -79,12 +80,13 @@ Route::post('/csrf', function() {
 // ------ Controller-----
 Route::get("/page",[PostesController::class, 'index']);
 Route::get("/",[HomePageController::class, 'index']);
+*/
 
 Route::resource(name: 'Paluma',controller:HomePageController::class);
 Route::get("/paluma/Product",[HomePageController::class, 'product'])->name(name:'product');
 Route::get("/paluma/signUp", [LoginController::class, 'signup'])->name(name:'SignUp');
-Route::post("/paluma/store", [LoginController::class, 'store'])->name(name:'SignUp');
-Route::resource(name : "/paluma/Login",controller: LoginController::class);*/
+//Route::post("/paluma/store", [LoginController::class, 'store'])->name(name:'SignUp');
+Route::resource(name : "/paluma/Login",controller: LoginController::class);
 
 
 //-------response header-------
@@ -149,7 +151,7 @@ Route::get('/', function(){
 //--------shares Data--------
 /*
   -making a certain data globally accessed by all the views
-*/
+
 
 Route::get('/', function(){
   return view('page');
@@ -166,3 +168,26 @@ Route::get('/home',function(){
 Route::get('/dashboard',function(){
   return view('dashboard');
 });
+*/
+
+//-------Session Variables--------
+/*
+Route::get('/dashboard', function(Request $request){
+
+  //using the Request class method
+  //$request->session(['mySecret'=>'Life is like a box of chokelate']);
+  //using the session helper method:
+  session(['lastBreath'=> 'I\'v tryed to come home but i have never arrived..Somewhere called vinland.. home']);
+  session()->save();
+
+  $value = session(key: 'lastBreath');
+
+  return $value;
+});
+*/
+
+/* sessionvariable with Controllers*/
+/*Route::prefix('session')->controller(SessionController::class)->group(function(){
+  Route::get( '/', 'index');
+  Route::get('/push/{about}/{secret}', 'update');
+});*/
