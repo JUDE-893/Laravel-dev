@@ -26,13 +26,14 @@
         <a class="py-2" href="#">
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="d-block mx-auto"><circle cx="12" cy="12" r="10"></circle><line x1="14.31" y1="8" x2="20.05" y2="17.94"></line><line x1="9.69" y1="8" x2="21.17" y2="8"></line><line x1="7.38" y1="12" x2="13.12" y2="2.06"></line><line x1="9.69" y1="16" x2="3.95" y2="6.06"></line><line x1="14.31" y1="16" x2="2.83" y2="16"></line><line x1="16.62" y1="12" x2="10.88" y2="21.94"></line></svg>
         </a>
-        <a class="py-2 d-none d-md-inline-block" href="#">Tour</a>
-        <a class="py-2 d-none d-md-inline-block" href="#">Product</a>
-        <a class="py-2 d-none d-md-inline-block" href="#">Features</a>
-        <a class="py-2 d-none d-md-inline-block" href="#">Enterprise</a>
-        <a class="py-2 d-none d-md-inline-block" href="#">Support</a>
-        <a class="py-2 d-none d-md-inline-block" href="#">Pricing</a>
-        <a class="py-2 d-none d-md-inline-block" href="#">Cart</a>
+        <a class="py-2 d-none d-md-inline-block" href="#">Discover</a>
+        <a class="py-2 d-none d-md-inline-block" href="#">Blogs</a>
+        <a class="py-2 d-none d-md-inline-block" href="#">Stories</a>
+        <a class="py-2 d-none d-md-inline-block" href="#">Write</a>
+        <a class="py-2 d-none d-md-inline-block" href="#">About</a>
+        <a class="py-2 d-none d-md-inline-block" href="#">FAQ</a>
+        <a class="py-2 d-none d-md-inline-block" href="#">Login</a>
+        <!-- <p>User Name: {{ session('user')->name }}</p> -->
       </div>
     </nav>
 
@@ -83,17 +84,21 @@
     <div class="d-md-flex flex-md-equal w-100 my-md-3 pl-md-3">
       <div class="bg-light mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
         <div class="my-3 p-3">
-          <h2 class="display-5">Another headline</h2>
-          <p class="lead">And an even wittier subheading.</p>
+          <h2 class="display-5">Bees.</h2>
+          <p class="lead">The most vital engineers in our planet are not doing well to survive.</p>
         </div>
-        <div class="bg-white box-shadow mx-auto" style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;"></div>
+        <div class="bg-white box-shadow mx-auto" style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;">
+          <img src="{{ asset('https://cdn.pixabay.com/photo/2020/09/06/15/35/hummel-5549231_960_720.jpg') }}" alt="Photo">
+        </div>
       </div>
       <div class="bg-light mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
         <div class="my-3 py-3">
-          <h2 class="display-5">Another headline</h2>
-          <p class="lead">And an even wittier subheading.</p>
+          <h2 class="display-5">The Northiest Sea</h2>
+          <p class="lead">Scandinavian seas waters, from humans and metholgy perspective.</p>
         </div>
-        <div class="bg-white box-shadow mx-auto" style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;"></div>
+        <div class="bg-white box-shadow mx-auto" style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;">
+          <img src="{{ asset('https://cdn.pixabay.com/photo/2022/07/18/01/25/sky-7328573_960_720.jpg') }}" alt="Photo">
+        </div>
       </div>
     </div>
 

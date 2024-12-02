@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\PostStoreRequestes;
+use Illuminate\Support\Facades\Hash;
+use App\Models\User;
+use App\Models\Post;
 
 class LoginController extends Controller
 {
@@ -85,10 +88,37 @@ class LoginController extends Controller
   //   }
     public function store(PostStoreRequestes $request)
     {
-      $validatedData = $request->validate();
-      dd($validatedData);
+       $validatedData = $request->validated();
+       $name = $validatedData['firstName'] . ' ' . $validatedData['lastName'];
+       User::create(array_merge([
+        'name'=> "$name",
+      ],$validatedData));
 
+      return redirect()->route('Login.index');
     }
+
+
+    /**
+     * verify user login .
+     */
+     public function loginVerif(PostStoreRequestes $request) {
+       $validated = $request->validated();
+       $user = User::where('email', $validated['email'])->first();
+
+        if ($user) {
+          if (Hash::check($validated['password'], $user['password'])) {
+              session(["user" => $user]);
+              session()->save();
+              return view('index');
+            }else {
+              return back()->withErrors(['password' => 'Incorrect Email Password']);
+            }
+        }
+
+       return back()->withErrors(['email' => 'Email address or Password Incorrect!']);
+      // dd($validated);
+     }
+
 
     /**
      * Display the specified resource.
@@ -103,6 +133,13 @@ class LoginController extends Controller
      */
     public function edit(string $id)
     {
+          $user = User::find(1);
+          $posts = $user->postes();
+
+          $post = Post::find(3);
+          $author = $post->user;
+          dd($author, $user);
+
         return 'edit';
     }
 

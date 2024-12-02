@@ -19,7 +19,7 @@
   </head>
 
   <body>
-    <form class="form-signin" action="/paluma/store" method="post">
+    <form class="form-signin" action="{{route('Login.store')}}" method="post">
       @csrf
       <input type="hidden" name="_token" value="{{csrf_token()}}">
       <div class="text-center mb-4">
@@ -28,33 +28,51 @@
       </div>
 
       <div class="form-label-group">
-        <input type="text" id="inputFname" class="form-control" name='data[]' placeholder="first name²" required autofocus>
+        <input value="{{old("firstName")}}" type="text" id="inputFname" class="form-control" name='firstName' placeholder="first name" required autofocus>
         <label for="inputfname">First Name</label>
+        <div id="email-feedback" class="invalidfeedback">
+          @error('firstName') {{$message}} @enderror
+        </div>
       </div>
 
       <div class="form-label-group">
-        <input type="text" id="inputLname" class="form-control" name='data[]' placeholder="last name" required >
+        <input value="{{old("lastName")}}" type="text" id="inputLname" class="form-control" name='lastName' placeholder="last name" required autocomplete="address-line3" autofocus>
         <label for="inputlname">Last Name</label>
+        <div id="email-feedback" class="invalidfeedback">
+          @error('lastName') {{$message}} @enderror
+        </div>
       </div>
 
       <div class="form-label-group">
-        <input type="email" id="inputEmail" class="form-control" name='data[]' placeholder="Email address" required >
+        <input value="{{old("email")}}" type="email" id="inputEmail" class="form-control" name='email' placeholder="Email address" required >
         <label for="inputEmail">Email address</label>
+        <div id="email-feedback" class="invalidfeedback">
+          @error('email') {{$message}} @enderror
+        </div>
       </div>
 
       <div class="form-label-group">
-        <input type="password" id="inputPassword" class="form-control" name='data[]' placeholder="Password" required>
+        <input type="password" id="inputPassword" class="form-control" name='password' placeholder="Password" required>
         <label for="inputPassword">Password</label>
+        <div id="email-feedback" class="invalidfeedback">
+          @error('password') {{$message}} @enderror
+        </div>
       </div>
 
       <div class="form-label-group">
-        <input type="password" id="inputcomfirmePassword" class="form-control" name='data[]' placeholder="confirme Password" required>
-        <label for="inputcomfirmePassword">Confirme Password</label>
+        <input type="password" id="inputconfirmePassword" class="form-control" name='password_confirmation' placeholder="confirme Password" required>
+        <label for="inputconfirmePassword">Confirme Password</label>
+        <div id="email-feedback" class="invalidfeedback">
+          @error('password_confirmation') {{$message}} @enderror
+        </div>
       </div>
 
       <div class="checkbox mb-3">
         <label>
-          <input type="checkbox" value="remember-me" name='data[]'> Remember me
+          <input type="checkbox" value="agree" name='agree'> Agree to our policy.
+          <div id="email-feedback" class="invalidfeedback">
+            @error('agree') {{$message}} @enderror
+          </div>
         </label>
       </div>
       <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>

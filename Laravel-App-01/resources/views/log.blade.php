@@ -21,7 +21,7 @@
   <body>
     <div class="d-flex d-column">
 
-      <form class="form-login needs-validation" action="{{route('Login.store')}}" method="post">
+      <form class="form-login" action="/paluma/loginVerif" method="post">
         @csrf
         <div class="text-center mb-4">
           <img class=GGG"mb-4" src="https://getbootstrap.com/docs/4.0/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
@@ -37,7 +37,7 @@
         </div>
 
         <div class="form-label-group">
-          <input  value="{{old("password")}}" type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
+          <input  value="" type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
           <label for="inputPassword">Password</label>
           <div id="email-feedback" class="invalidfeedback">
             @error('password') {{$message}} @enderror

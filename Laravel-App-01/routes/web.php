@@ -85,7 +85,7 @@ Route::get("/",[HomePageController::class, 'index']);
 Route::resource(name: 'Paluma',controller:HomePageController::class);
 Route::get("/paluma/Product",[HomePageController::class, 'product'])->name(name:'product');
 Route::get("/paluma/signUp", [LoginController::class, 'signup'])->name(name:'SignUp');
-//Route::post("/paluma/store", [LoginController::class, 'store'])->name(name:'SignUp');
+Route::post("/paluma/loginVerif", [LoginController::class, 'loginVerif']);
 Route::resource(name : "/paluma/Login",controller: LoginController::class);
 
 
