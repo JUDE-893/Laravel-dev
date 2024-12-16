@@ -21,21 +21,7 @@
 
   <body>
 
-    <nav class="site-header sticky-top py-1">
-      <div class="container d-flex flex-column flex-md-row justify-content-between">
-        <a class="py-2" href="#">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="d-block mx-auto"><circle cx="12" cy="12" r="10"></circle><line x1="14.31" y1="8" x2="20.05" y2="17.94"></line><line x1="9.69" y1="8" x2="21.17" y2="8"></line><line x1="7.38" y1="12" x2="13.12" y2="2.06"></line><line x1="9.69" y1="16" x2="3.95" y2="6.06"></line><line x1="14.31" y1="16" x2="2.83" y2="16"></line><line x1="16.62" y1="12" x2="10.88" y2="21.94"></line></svg>
-        </a>
-        <a class="py-2 d-none d-md-inline-block" href="#">Discover</a>
-        <a class="py-2 d-none d-md-inline-block" href="#">Blogs</a>
-        <a class="py-2 d-none d-md-inline-block" href="#">Stories</a>
-        <a class="py-2 d-none d-md-inline-block" href="#">Write</a>
-        <a class="py-2 d-none d-md-inline-block" href="#">About</a>
-        <a class="py-2 d-none d-md-inline-block" href="#">FAQ</a>
-        <a class="py-2 d-none d-md-inline-block" href="#">Login</a>
-        <!-- <p>User Name: {{ session('user')->name }}</p> -->
-      </div>
-    </nav>
+    <x-navBar/>
 
     <div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-light">
       <div class="col-md-5 p-lg-5 mx-auto my-5 header-text" >
@@ -47,18 +33,18 @@
       <div class="product-device product-device-2 box-shadow d-none d-md-block"></div>
     </div>
 
-    <div class="d-md-flex flex-md-equal w-100 my-md-3 pl-md-3">
+    <!-- {{--<div class="d-md-flex flex-md-equal w-100 my-md-3 pl-md-3">
       <div class="bg-dark mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center text-white overflow-hidden">
         <div class="my-3 py-3">
           <h2 class="display-5">Another headline</h2>
-          <p class="lead"><!--And an even wittier subheading.--> {{microtime(true)-LARAVEL_START}}</p>
+          <p class="lead"> {{microtime(true)-LARAVEL_START}}</p>
         </div>
         <div class="bg-light box-shadow mx-auto" style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;"></div>
       </div>
       <div class="bg-light mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
         <div class="my-3 p-3">
           <h2 class="display-5">Another headline</h2>
-          <p class="lead"><!--And an even wittier subheading.-->{{'<h2 class="display-5">php auto escaping</h2>'}}</p>
+          <p class="lead">{{'<h2 class="display-5">php auto escaping</h2>'}}</p>
         </div>
         <div class="bg-dark box-shadow mx-auto" style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;"></div>
       </div>
@@ -79,45 +65,32 @@
         </div>
         <div class="bg-light box-shadow mx-auto" style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;"></div>
       </div>
-    </div>
+    </div>--}} -->
+    @for($pi= 0; $pi< count($posts); $pi += 2)
 
-    <div class="d-md-flex flex-md-equal w-100 my-md-3 pl-md-3">
-      <div class="bg-light mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
-        <div class="my-3 p-3">
-          <h2 class="display-5">Bees.</h2>
-          <p class="lead">The most vital engineers in our planet are not doing well to survive.</p>
+        <div class="d-md-flex flex-md-equal w-100 my-md-3 pl-md-3" style='height:38vw'>
+            <div class="bg-light mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
+              <a href={{route('Paluma.show', ['Paluma' => $posts[$pi]->id])}}><div class="my-3 p-3">
+                <h2 class="display-5">{{$posts[$pi]->title}}</h2>
+                <p class="lead">{{$posts[$pi]->intro}}</p>
+              </div></a>
+              <div class="box-shadow mx-auto" style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;">
+                <a href={{route('Paluma.show', ['Paluma' => $posts[$pi]->id]) }}><img src="{{ asset($posts[$pi]->post_img) }}" alt="Photo"></a>
+              </div>
+            </div>
+          @if (count($posts) > $pi +1)
+          <div class="bg-light mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
+            <div class="my-3 p-3">
+              <h2 class="display-5">{{$posts[$pi+1]->title}}</h2>
+              <p class="lead">{{$posts[$pi+1]->intro}}</p>
+            </div>
+            <div class="box-shadow mx-auto" style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;">
+              <img src="{{ asset($posts[$pi+1]->post_img) }}" alt="Photo">
+            </div>
+          </div>
+          @endif
         </div>
-        <div class="bg-white box-shadow mx-auto" style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;">
-          <img src="{{ asset('https://cdn.pixabay.com/photo/2020/09/06/15/35/hummel-5549231_960_720.jpg') }}" alt="Photo">
-        </div>
-      </div>
-      <div class="bg-light mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
-        <div class="my-3 py-3">
-          <h2 class="display-5">The Northiest Sea</h2>
-          <p class="lead">Scandinavian seas waters, from humans and metholgy perspective.</p>
-        </div>
-        <div class="bg-white box-shadow mx-auto" style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;">
-          <img src="{{ asset('https://cdn.pixabay.com/photo/2022/07/18/01/25/sky-7328573_960_720.jpg') }}" alt="Photo">
-        </div>
-      </div>
-    </div>
-
-    <div class="d-md-flex flex-md-equal w-100 my-md-3 pl-md-3">
-      <div class="bg-light mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
-        <div class="my-3 p-3">
-          <h2 class="display-5">Another headline</h2>
-          <p class="lead">And an even wittier subheading.</p>
-        </div>
-        <div class="bg-white box-shadow mx-auto" style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;"></div>
-      </div>
-      <div class="bg-light mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
-        <div class="my-3 py-3">
-          <h2 class="display-5">Another headline</h2>
-          <p class="lead">And an even wittier subheading.</p>
-        </div>
-        <div class="bg-white box-shadow mx-auto" style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;"></div>
-      </div>
-    </div>
+    @endfor
 
     <footer class="container py-5">
       <div class="row">

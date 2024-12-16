@@ -11,7 +11,7 @@ class Post extends Model
 
     // (!) define what tables column must be filled when inserting a record
     protected $fillable = [
-      'title','contentBody','user_id'
+      'title','intro','post_img','contentBody','user_id'
     ];
 
     // (opt) defining the name of the table (if not the plural of the model name)

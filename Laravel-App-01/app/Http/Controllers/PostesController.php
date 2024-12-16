@@ -1,22 +1,70 @@
 <?php
+
 namespace App\Http\Controllers;
 
-/**
- * controllers are classes that handle the logic behind HTTP requests. They act as an intermediary between the views and models, and are responsible for processing user input, interacting with the database, and returning appropriate responses (usually views or JSON).
- */
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Http\Requests\WriteFormRequest;
+
 
 class PostesController extends Controller
 {
+    /**
+     * Display a listing of the resource.
+     */
+    public function index()
+    {
+        return view('write');
+    }
 
-  // middleware with Controllers
-  public function __construct() {
-    $this->middleware('auth');
-  }
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+        //
+    }
 
-  public function index() {
-    return view('page');
-  }
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(WriteFormRequest $request)
+    {
+        $data = $request->validated();
+        // dd($data);
+        DB::table('posts')->insert(array_merge($data,['user_id' => session('user')->id]));
+        return view('index');
+    }
 
+    /**
+     * Display the specified resource.
+     */
+    public function show(string $id)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(string $id)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, string $id)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(string $id)
+    {
+        //
+    }
 }
-
- ?>

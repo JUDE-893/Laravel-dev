@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Requests\PostStoreRequestes;
+use App\Http\Requests\LoginStoreRequestes;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use App\Models\Post;
@@ -86,7 +86,7 @@ class LoginController extends Controller
   //     dd($request);
   //     return redirect()->back();
   //   }
-    public function store(PostStoreRequestes $request)
+    public function store(LoginStoreRequestes $request)
     {
        $validatedData = $request->validated();
        $name = $validatedData['firstName'] . ' ' . $validatedData['lastName'];
@@ -101,7 +101,7 @@ class LoginController extends Controller
     /**
      * verify user login .
      */
-     public function loginVerif(PostStoreRequestes $request) {
+     public function loginVerif(LoginStoreRequestes $request) {
        $validated = $request->validated();
        $user = User::where('email', $validated['email'])->first();
 

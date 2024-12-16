@@ -87,6 +87,7 @@ Route::get("/paluma/Product",[HomePageController::class, 'product'])->name(name:
 Route::get("/paluma/signUp", [LoginController::class, 'signup'])->name(name:'SignUp');
 Route::post("/paluma/loginVerif", [LoginController::class, 'loginVerif']);
 Route::resource(name : "/paluma/Login",controller: LoginController::class);
+Route::resource(name: '/paluma/write',controller: PostesController::class);
 
 
 //-------response header-------

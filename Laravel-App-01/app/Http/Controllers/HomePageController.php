@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Post;
 
 class HomePageController extends Controller
 {
@@ -40,9 +41,10 @@ class HomePageController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show($id)
     {
-        //
+        $post = Post::with('user')->find($id);
+        return view('index').with(compose('post'));
     }
 
     /**
