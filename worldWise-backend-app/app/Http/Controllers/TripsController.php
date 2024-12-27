@@ -55,7 +55,7 @@ class TripsController
   //function that retrieve and return all the user's trips
   public function getTrips($user_id) {
     \Log::info('#user_Id : ' . $user_id);
-    $trips = Trip::where('user_id',34)->get();
+    $trips = Trip::where('user_id',$user_id)->get();
     \Log::info('#trips : ' . $trips);
 
     return response()->json([
