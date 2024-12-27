@@ -18,8 +18,8 @@ class TripsController
     try {
       $validated = $request->validate([
         'user_id'=> 'required',
-        'wikipediaId'=> 'min:1',
-        'description'=> 'min:1',
+        'wikipediaId'=> 'min:0',
+        'description'=> 'min:0',
         'date'=> 'required',
         'countryFlag'=> 'required',
         'countryName'=> 'required',
@@ -63,5 +63,22 @@ class TripsController
       'message' => 'data fetched successfully'
     ],200);
   }
+
+  // function that delete a user's trip record
+  public function deleteTrip(Request $request) {
+    $trip = Trip::find($request->id);
+    if ($trip) {
+      if ($trip->user_id === $request->user_id) {
+        $trip->delete();
+        return response()->json([
+          'message' => 'trip got removed successfully '
+        ],200);
+      };
+    };
+    return response()->json([
+      'message' => 'Oops! something went wrong!'
+    ],403);
+  }
+
 }
  ?>
