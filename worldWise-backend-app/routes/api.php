@@ -11,5 +11,5 @@ Route::post('/check.auth', [AuthController::class, 'checkAuth']);
 Route::post('/add_trip',[TripsController::class, 'addTrip']);
 Route::get('trips/{user_id}', [TripsController::class,'getTrips']);
 Route::post('trips/delete', [TripsController::class,'deleteTrip']);
-
+Route::post('trips/modify',[TripsController::class , 'modifyTrip']);
  ?>

@@ -54,9 +54,9 @@ class TripsController
 
   //function that retrieve and return all the user's trips
   public function getTrips($user_id) {
-    \Log::info('#user_Id : ' . $user_id);
+    //\Log::info('#user_Id : ' . $user_id);
     $trips = Trip::where('user_id',$user_id)->get();
-    \Log::info('#trips : ' . $trips);
+    //\Log::info('#trips : ' . $trips);
 
     return response()->json([
       'trips' => $trips,
@@ -80,5 +80,53 @@ class TripsController
     ],403);
   }
 
+  // function that modify a user's trip record
+  public function modifyTrip(Request $request) {
+
+    try {
+      $validated = $request->validate([
+        'id' => 'required',
+        'user_id'=> 'required',
+        'wikipediaId'=> 'min:0',
+        'description'=> 'min:0',
+        'date'=> 'required',
+        'countryFlag'=> 'required',
+        'countryName'=> 'required',
+        'cityName'=> 'required',
+        'lat'=> 'required',
+        'lng'=> 'required'
+      ]);
+
+      $trip = Trip::find($validated['id']);
+
+      if ($trip) {
+        if($trip->user_id === $validated['user_id']) {
+          $trip->fill(collect($validated)->except('id')->toArray());
+          $trip->save();
+          return response()->json([
+            'message' => 'Trip updated successfully!'
+          ],200);
+        };
+      };
+
+
+    }catch(ValidationException $e) {
+      // \Log::info('#Validation_Error : ' . $e);
+      return response()->json([
+        'message' => 'validation error!',
+        'error' => $e->getMessage()
+      ],422);
+    }catch (\Exception $e) {
+      // \Log::info('#Exception_Error : ' . $e);
+      return response()->json([
+        'message' => 'Oops! Something just went wrong.. Try Later',
+        'error' => $e->getMessage()
+      ],200);
+    };
+
+  }
+
 }
+
+
  ?>
