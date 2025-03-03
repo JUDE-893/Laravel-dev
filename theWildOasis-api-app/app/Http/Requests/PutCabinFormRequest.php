@@ -27,7 +27,7 @@ class PutCabinFormRequest extends FormRequest
             'name' => 'string|max:255',
             'max_capacity' => 'integer|min:1',
             'regular_price' => 'numeric|min:0',
-            'discount' => 'nullable|numeric|between:0,1',
+            'discount' => 'nullable|numeric',
             'description' => 'nullable|string',
             'image' => 'nullable|string|max:2048'
         ];

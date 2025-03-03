@@ -25,7 +25,7 @@ class BookingFilterFormRequest extends FormRequest
     {
         return [
             "pageLength" => 'sometimes|integer|min:5',
-            "page" => 'sometimes|integer|min:1',
+            "page" => 'sometimes|integer|min:0',
             "filterColumn" => 'sometimes|string|min:1',
             "filterValue" => 'sometimes|string|min:1',
             "sortByColumn" => 'sometimes|string',

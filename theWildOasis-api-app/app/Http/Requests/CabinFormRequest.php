@@ -27,7 +27,7 @@ class CabinFormRequest extends FormRequest
             'name' => 'required|string|max:255',
             'max_capacity' => 'required|integer|min:1',
             'regular_price' => 'required|numeric|min:0',
-            'discount' => 'nullable|numeric|between:0,1',
+            'discount' => 'nullable|numeric',
             'description' => 'nullable|string',
             'image' => 'nullable|string|max:2048'
         ];

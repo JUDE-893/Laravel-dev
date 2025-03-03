@@ -18,11 +18,13 @@ class SettingsController extends Controller
         try {
           $settings = Settings::all();
           return response()->json([
+            'success' => true,
             'message' => 'settings fetched successfully!',
             'settings' => $settings
           ],200);
         } catch (\Exception $e) {
           return response()->json([
+            'success' => false,
             'message' => 'fails',
             'error' => $e->getMessage()
           ]);
@@ -73,17 +75,20 @@ class SettingsController extends Controller
         $settings = $settings->update($request->validated());
 
         return response()->json([
+          'success' => true,
           'message' => 'settings updated successfully!',
           'settings' => $request->validated()
         ],200);
       } catch (ModelNotFoundException $e) {
         return response()->json([
+          'success' => false,
           'message' => 'Not Found!',
           'error' => $e->getMessage()
         ],404);
 
       } catch (\Exception $e) {
         return response()->json([
+          'success' => false,
           'message' => 'fails',
           'error' => $e->getMessage()
         ],401);

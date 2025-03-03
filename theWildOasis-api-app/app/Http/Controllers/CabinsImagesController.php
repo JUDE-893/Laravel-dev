@@ -62,7 +62,7 @@ class CabinsImagesController extends Controller
         };
 
         if (!Storage::disk('public')->exists('cabins/' . $request->imageName)) {
-          abort(402, 'No Image to Repalce');
+          //abort(402, 'No Image to Repalce');
         };
 
         Storage::disk('public')->delete('cabins/' . $request->imageName);
