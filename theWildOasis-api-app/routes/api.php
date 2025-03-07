@@ -9,7 +9,7 @@ use App\Http\Controllers\BookingsController;
 use App\Http\Controllers\CabinsImagesController;
 
 // definning routes
-Route::middleware(['auth:sanctum'])->prefix('the-wild-oasis')->group(function() {
+Route::middleware(['auth:sanctum','verified'])->prefix('the-wild-oasis')->group(function() {
   Route::resource('/cabins',CabinsController::class);
   Route::resource('/settings',SettingsController::class);
   Route::resource('/Bookings',BookingsController::class);
@@ -18,8 +18,22 @@ Route::middleware(['auth:sanctum'])->prefix('the-wild-oasis')->group(function() 
   Route::post('/Bookings/get-today-activities',[BookingsController::class, 'edit']);
   Route::resource('/bucket/cabins',CabinsImagesController::class);
   Route::post('/bucket/cabins/update',[CabinsImagesController::class, 'updateImage']);
-});
+  Route::get('/user', function (Request $request) {
 
-Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
-    return $request->user();
+    try {
+      \Log::Info($request->user());
+      // success
+      return response()->json([
+        'success' => true,
+        'user' => $request->user()
+      ],200);
+    } catch (\Exception $e) {
+      // fails
+      return response()->json([
+        'success' => false,
+        'error' => $e->getMessage()
+      ],404);
+    };
+
+  });
 });
